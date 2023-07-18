@@ -21,126 +21,231 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 2rem;
     }
 
-    .controls {
+    .input-group {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       margin-bottom: 1rem;
     }
 
-    .controls label {
+    .input-group label {
       font-weight: bold;
-    }
-
-    .controls input {
+      margin-right: 1rem;
       width: 100px;
     }
 
-    .controls select {
-      width: 200px;
+    .input-group input {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 0.5rem;
+    }
+
+    .input-group select {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 0.5rem;
     }
 
     .preview {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .preview div {
-      background-color: white;
-      border-radius: 5px;
-      padding: 0.5rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .preview h2 {
+      font-size: var(--h2-size);
+      margin-bottom: 0.5rem;
     }
 
     .preview p {
-      font-size: var(--size);
-      line-height: 1.2;
+      font-size: var(--p-size);
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
 <body>
-  <h1>文本比例在线工具</h1>
+  <h1>字体比例工具</h1>
   <div class="container">
-    <div class="controls">
-      <label for="base">基准大小（像素）</label>
-      <input type="number" id="base" value="16" min="8" max="32">
+    <div class="input-group">
+      <label for="text">文本</label>
+      <input type="text" id="text" value="这是一个示例文本" />
+    </div>
+    <div class="input-group">
       <label for="scale">比例</label>
       <select id="scale">
-        <option value="1.067">小二度</option>
-        <option value="1.125">大二度</option>
-        <option value="1.2">小三度</option>
-        <option value="1.25">大三度</option>
-        <option value="1.333">纯四度</option>
-        <option value="1.414">增四度</option>
-        <option value="1.5">纯五度</option>
-        <option value="1.618">黄金比例</option>
-        <option value="1.667">小六度</option>
-        <option value="1.778">大六度</option>
-        <option value="2">八度</option>
-        <option value="2.5">大十度</option>
-        <option value="3">大十二度</option>
-        <option value="4">双八度</option>
-        <option value="8">四倍八度</option>
+        <option value="1.067">Minor Second</option>
+        <option value="1.125">Major Second</option>
+        <option value="1.2">Minor Third</option>
+        <option value="1.25">Major Third</option>
+        <option value="1.333">Perfect Fourth</option>
+        <option value="1.414">Augmented Fourth</option>
+        <option value="1.5">Perfect Fifth</option>
+        <option value="1.6">Minor Sixth</option>
+        <option value="1.618">Golden Ratio</option>
+        <option value="1.667">Major Sixth</option>
+        <option value="1.778">Minor Seventh</option>
+        <option value="1.875">Major Seventh</option>
+        <option value="2">Octave</option>
+        <option value="2.5">Major Tenth</option>
+        <option value="3">Major Eleventh</option>
+        <option value="4">Major Twelfth</option>
+        <option value="8">Double Octave</option>
       </select>
+    </div>
+    <div class="input-group">
+      <label for="base-size">基准大小 (px)</label>
+      <input type="number" id="base-size" min="10" max="100" step="1" value="16" />
     </div>
 
     <div class="preview">
-      <!-- 这里是预览区域，会根据用户的选择动态生成 -->
+      <h2 id="h2-text"></h2>
+      <p id="p-text"></p>
     </div>
 
+    <!-- 使用JavaScript来实现动态更新和计算 -->
+    <script>
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+
+// 获取页面元素
+const textInput = document.getElementById("text");
+const scaleSelect = document.getElementById("scale");
+const baseSizeInput = document.getElementById("base-size");
+
+const h2Text = document.getElementById("h2-text");
+const pText = document.getElementById("p-text");
+
+// 定义一个函数，根据输入的值来更新预览区域
+function updatePreview() {
+  
+  // 获取输入的值
+  const text = textInput.value; // 文本内容
+  const scale = parseFloat(scaleSelect.value); // 比例因子
+  const baseSize = parseInt(baseSizeInput.value); // 基准大小
+
+  // 计算h2和p的字体大小
+  const h2Size = baseSize * scale; // h2的字体大小等于基准大小乘以比例因子
+  const pSize = baseSize; // p的字体大小等于基准大小
+
+  // 设置h2和p的文本内容和样式
+  h2Text.textContent = text; // h2的文本内容等于输入的文本
+  pText.textContent = text; // p的文本内容等于输入的文本
+  h2Text.style.fontSize = h2Size + "px"; // h2的字体大小等于计算出的h2Size
+  pText.style.fontSize = pSize + "px"; // p的字体大小等于计算出的pSize
+
+}
+
+// 调用一次函数，初始化预览区域
+updatePreview();
+
+// 给输入框和下拉框添加事件监听器，当值改变时，调用函数更新预览区域
+textInput.addEventListener("input", updatePreview);
+scaleSelect.addEventListener("change", updatePreview);
+baseSizeInput.addEventListener("input", updatePreview);
+
+    </script>
   </div>
-
-  <script>
-    // 获取元素
-    const baseInput = document.getElementById("base");
-    const scaleSelect = document.getElementById("scale");
-    const previewDiv = document.querySelector(".preview");
-
-    // 定义一个函数，根据用户的选择生成预览内容
-    function generatePreview() {
-      // 清空原有的内容
-      previewDiv.innerHTML = "";
-
-      // 获取用户选择的基准大小和比例
-      const base = Number(baseInput.value);
-      const scale = Number(scaleSelect.value);
-
-      // 定义一个数组，存储不同级别的文本
-      const texts = ["标题一", "标题二", "标题三", "标题四", "正文", "小字"];
-
-      // 遍历数组，为每个文本创建一个div元素，并设置其字体大小
-      for (let i = 0; i < texts.length; i++) {
-        // 计算当前文本的字体大小，根据公式：size = base * scale ^ i
-        const size = base * Math.pow(scale, i);
-
-        // 创建一个div元素
-        const div = document.createElement("div");
-
-        // 创建一个p元素，用于显示文本和字体大小
-        const p = document.createElement("p");
-        p.textContent = `${texts[i]} - ${size.toFixed(2)}px`;
-
-        // 设置p元素的字体大小为计算出的值
-        p.style.setProperty("--size", `${size}px`);
-
-        // 将p元素添加到div元素中
-        div.appendChild(p);
-
-        // 将div元素添加到预览区域中
-        previewDiv.appendChild(div);
-      }
-    }
-
-    // 调用一次函数，生成初始的预览内容
-    generatePreview();
-
-    // 为基准大小和比例的输入框添加事件监听器，当用户改变它们的值时，重新生成预览内容
-    baseInput.addEventListener("input", generatePreview);
-    scaleSelect.addEventListener("change", generatePreview);
-  </script>
 </body>
 </html>
