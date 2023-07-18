@@ -1,0 +1,147 @@
+<html> <head> <meta charset=“utf-8”> <title>字体比例工具</title> <style> * { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.scale-select {
+  display: flex;
+  align-items: center;
+}
+
+.scale-select label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.scale-select select {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.preview {
+  margin-top: 20px;
+}
+
+.preview h1, .preview h2, .preview h3, .preview h4, .preview h5, .preview h6, .preview p {
+  margin-bottom: 10px;
+}
+
+.preview h1 {
+  font-size: var(--h1-size);
+}
+
+.preview h2 {
+  font-size: var(--h2-size);
+}
+
+.preview h3 {
+  font-size: var(--h3-size);
+}
+
+.preview h4 {
+  font-size: var(--h4-size);
+}
+
+.preview h5 {
+  font-size: var(--h5-size);
+}
+
+.preview h6 {
+  font-size: var(--h6-size);
+}
+
+.preview p {
+  font-size: var(--p-size);
+}
+复制
+</style> </head> <body> <div class=“container”> <div class=“header”> <div class=“logo”>字体比例工具</div> <div class=“scale-select”> <label for=“scale”>比例:</label> <select id=“scale”> <option value=“1.067”>Minor Second</option> <option value=“1.125”>Major Second</option> <option value=“1.2”>Minor Third</option> <option value=“1.25”>Major Third</option> <option value=“1.333”>Perfect Fourth</option> <option value=“1.414”>Augmented Fourth</option> <option value=“1.5”>Perfect Fifth</option> <option value=“1.6”>Minor Sixth</option> <option value=“1.618”>Golden Ratio</option> <option value=“1.667”>Major Sixth</option> <option value=“1.778”>Minor Seventh</option> <option value=“1.875”>Major Seventh</option> <option value=“2” selected>Octave</option> <option value=“2.5”>Major Tenth</option> <option value=“3”>Major Eleventh</option> <option value=“4”>Major Twelfth</option> </select> </div> </div>
+
+<div class="preview">
+  <h1>这是一个标题一的示例文本。</h1>
+  <h2>这是一个标题二的示例文本。</h2>
+  <h3>这是一个标题三的示例文本。</h3>
+  <h4>这是一个标题四的示例文本。</h4>
+  <h5>这是一个标题五的示例文本。</h5>
+  <h6>这是一个标题六的示例文本。</h6>
+  <p>这是一个段落的示例文本。你可以在这里看到不同的字体大小和比例，以及它们之间的关系。你可以通过选择不同的比例来改变字体大小，也可以看到实时的预览效果。</p>
+</div>
+复制
+</div>
+
+<script> // 获取元素 var scaleSelect = document.getElementById(“scale”); var preview = document.getElementsByClassName(“preview”)[0];
+
+// 定义初始字体大小
+var baseSize = 16;
+
+// 定义初始比例
+var scale = 2;
+
+// 定义CSS变量
+var h1Size = "--h1-size";
+var h2Size = "--h2-size";
+var h3Size = "--h3-size";
+var h4Size = "--h4-size";
+var h5Size = "--h5-size";
+var h6Size = "--h6-size";
+var pSize = "--p-size";
+
+// 定义更新字体大小的函数
+function updateFontSize() {
+  // 根据比例计算字体大小
+  var h1FontSize = baseSize * Math.pow(scale, 4) + "px";
+  var h2FontSize = baseSize * Math.pow(scale, 3) + "px";
+  var h3FontSize = baseSize * Math.pow(scale, 2) + "px";
+  var h4FontSize = baseSize * Math.pow(scale, 1) + "px";
+  var h5FontSize = baseSize * Math.pow(scale, 0) + "px";
+  var h6FontSize = baseSize / Math.pow(scale, 1) + "px";
+  var pFontSize = baseSize / Math.pow(scale, 2) + "px";
+
+  // 设置CSS变量的值
+  preview.style.setProperty(h1Size, h1FontSize);
+  preview.style.setProperty(h2Size, h2FontSize);
+  preview.style.setProperty(h3Size, h3FontSize);
+  preview.style.setProperty(h4Size, h4FontSize);
+  preview.style.setProperty(h5Size, h5FontSize);
+  preview.style.setProperty(h6Size, h6FontSize);
+  preview.style.setProperty(pSize, pFontSize);
+}
+
+// 调用更新字体大小的函数
+updateFontSize();
+
+// 监听比例选择的变化事件
+scaleSelect.addEventListener("change", function() {
+  // 获取选择的比例值
+  scale = parseFloat(this.value);
+
+  // 调用更新字体大小的函数
+  updateFontSize();
+});
+复制
+</script> </body> </html>
