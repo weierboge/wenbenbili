@@ -1,147 +1,146 @@
-<html> <head> <meta charset=“utf-8”> <title>字体比例工具</title> <style> * { box-sizing: border-box; margin: 0; padding: 0; }
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
 
-.logo {
-  font-size: 32px;
-  font-weight: bold;
-  color: #333333;
-}
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
 
-.scale-select {
-  display: flex;
-  align-items: center;
-}
+    .controls label {
+      font-weight: bold;
+    }
 
-.scale-select label {
-  margin-right: 10px;
-  font-size: 16px;
-  color: #333333;
-}
+    .controls input {
+      width: 100px;
+    }
 
-.scale-select select {
-  width: 200px;
-  height: 30px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
-  color: #333333;
-}
+    .controls select {
+      width: 200px;
+    }
 
-.preview {
-  margin-top: 20px;
-}
+    .preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
 
-.preview h1, .preview h2, .preview h3, .preview h4, .preview h5, .preview h6, .preview p {
-  margin-bottom: 10px;
-}
+    .preview div {
+      background-color: white;
+      border-radius: 5px;
+      padding: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-.preview h1 {
-  font-size: var(--h1-size);
-}
+    .preview p {
+      font-size: var(--size);
+      line-height: 1.2;
+    }
+  </style>
+</head>
+<body>
+  <h1>文本比例在线工具</h1>
+  <div class="container">
+    <div class="controls">
+      <label for="base">基准大小（像素）</label>
+      <input type="number" id="base" value="16" min="8" max="32">
+      <label for="scale">比例</label>
+      <select id="scale">
+        <option value="1.067">小二度</option>
+        <option value="1.125">大二度</option>
+        <option value="1.2">小三度</option>
+        <option value="1.25">大三度</option>
+        <option value="1.333">纯四度</option>
+        <option value="1.414">增四度</option>
+        <option value="1.5">纯五度</option>
+        <option value="1.618">黄金比例</option>
+        <option value="1.667">小六度</option>
+        <option value="1.778">大六度</option>
+        <option value="2">八度</option>
+        <option value="2.5">大十度</option>
+        <option value="3">大十二度</option>
+        <option value="4">双八度</option>
+        <option value="8">四倍八度</option>
+      </select>
+    </div>
 
-.preview h2 {
-  font-size: var(--h2-size);
-}
+    <div class="preview">
+      <!-- 这里是预览区域，会根据用户的选择动态生成 -->
+    </div>
 
-.preview h3 {
-  font-size: var(--h3-size);
-}
+  </div>
 
-.preview h4 {
-  font-size: var(--h4-size);
-}
+  <script>
+    // 获取元素
+    const baseInput = document.getElementById("base");
+    const scaleSelect = document.getElementById("scale");
+    const previewDiv = document.querySelector(".preview");
 
-.preview h5 {
-  font-size: var(--h5-size);
-}
+    // 定义一个函数，根据用户的选择生成预览内容
+    function generatePreview() {
+      // 清空原有的内容
+      previewDiv.innerHTML = "";
 
-.preview h6 {
-  font-size: var(--h6-size);
-}
+      // 获取用户选择的基准大小和比例
+      const base = Number(baseInput.value);
+      const scale = Number(scaleSelect.value);
 
-.preview p {
-  font-size: var(--p-size);
-}
-复制
-</style> </head> <body> <div class=“container”> <div class=“header”> <div class=“logo”>字体比例工具</div> <div class=“scale-select”> <label for=“scale”>比例:</label> <select id=“scale”> <option value=“1.067”>Minor Second</option> <option value=“1.125”>Major Second</option> <option value=“1.2”>Minor Third</option> <option value=“1.25”>Major Third</option> <option value=“1.333”>Perfect Fourth</option> <option value=“1.414”>Augmented Fourth</option> <option value=“1.5”>Perfect Fifth</option> <option value=“1.6”>Minor Sixth</option> <option value=“1.618”>Golden Ratio</option> <option value=“1.667”>Major Sixth</option> <option value=“1.778”>Minor Seventh</option> <option value=“1.875”>Major Seventh</option> <option value=“2” selected>Octave</option> <option value=“2.5”>Major Tenth</option> <option value=“3”>Major Eleventh</option> <option value=“4”>Major Twelfth</option> </select> </div> </div>
+      // 定义一个数组，存储不同级别的文本
+      const texts = ["标题一", "标题二", "标题三", "标题四", "正文", "小字"];
 
-<div class="preview">
-  <h1>这是一个标题一的示例文本。</h1>
-  <h2>这是一个标题二的示例文本。</h2>
-  <h3>这是一个标题三的示例文本。</h3>
-  <h4>这是一个标题四的示例文本。</h4>
-  <h5>这是一个标题五的示例文本。</h5>
-  <h6>这是一个标题六的示例文本。</h6>
-  <p>这是一个段落的示例文本。你可以在这里看到不同的字体大小和比例，以及它们之间的关系。你可以通过选择不同的比例来改变字体大小，也可以看到实时的预览效果。</p>
-</div>
-复制
-</div>
+      // 遍历数组，为每个文本创建一个div元素，并设置其字体大小
+      for (let i = 0; i < texts.length; i++) {
+        // 计算当前文本的字体大小，根据公式：size = base * scale ^ i
+        const size = base * Math.pow(scale, i);
 
-<script> // 获取元素 var scaleSelect = document.getElementById(“scale”); var preview = document.getElementsByClassName(“preview”)[0];
+        // 创建一个div元素
+        const div = document.createElement("div");
 
-// 定义初始字体大小
-var baseSize = 16;
+        // 创建一个p元素，用于显示文本和字体大小
+        const p = document.createElement("p");
+        p.textContent = `${texts[i]} - ${size.toFixed(2)}px`;
 
-// 定义初始比例
-var scale = 2;
+        // 设置p元素的字体大小为计算出的值
+        p.style.setProperty("--size", `${size}px`);
 
-// 定义CSS变量
-var h1Size = "--h1-size";
-var h2Size = "--h2-size";
-var h3Size = "--h3-size";
-var h4Size = "--h4-size";
-var h5Size = "--h5-size";
-var h6Size = "--h6-size";
-var pSize = "--p-size";
+        // 将p元素添加到div元素中
+        div.appendChild(p);
 
-// 定义更新字体大小的函数
-function updateFontSize() {
-  // 根据比例计算字体大小
-  var h1FontSize = baseSize * Math.pow(scale, 4) + "px";
-  var h2FontSize = baseSize * Math.pow(scale, 3) + "px";
-  var h3FontSize = baseSize * Math.pow(scale, 2) + "px";
-  var h4FontSize = baseSize * Math.pow(scale, 1) + "px";
-  var h5FontSize = baseSize * Math.pow(scale, 0) + "px";
-  var h6FontSize = baseSize / Math.pow(scale, 1) + "px";
-  var pFontSize = baseSize / Math.pow(scale, 2) + "px";
+        // 将div元素添加到预览区域中
+        previewDiv.appendChild(div);
+      }
+    }
 
-  // 设置CSS变量的值
-  preview.style.setProperty(h1Size, h1FontSize);
-  preview.style.setProperty(h2Size, h2FontSize);
-  preview.style.setProperty(h3Size, h3FontSize);
-  preview.style.setProperty(h4Size, h4FontSize);
-  preview.style.setProperty(h5Size, h5FontSize);
-  preview.style.setProperty(h6Size, h6FontSize);
-  preview.style.setProperty(pSize, pFontSize);
-}
+    // 调用一次函数，生成初始的预览内容
+    generatePreview();
 
-// 调用更新字体大小的函数
-updateFontSize();
-
-// 监听比例选择的变化事件
-scaleSelect.addEventListener("change", function() {
-  // 获取选择的比例值
-  scale = parseFloat(this.value);
-
-  // 调用更新字体大小的函数
-  updateFontSize();
-});
-复制
-</script> </body> </html>
+    // 为基准大小和比例的输入框添加事件监听器，当用户改变它们的值时，重新生成预览内容
+    baseInput.addEventListener("input", generatePreview);
+    scaleSelect.addEventListener("change", generatePreview);
+  </script>
+</body>
+</html>
